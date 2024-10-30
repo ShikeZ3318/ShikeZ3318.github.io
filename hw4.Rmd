@@ -2,7 +2,7 @@
 title: "hw4"
 author: "Shike Zhang"
 date: "2024-10-30"
-output: github_document
+output: html_documented
 ---
 
 ```{r setup, include=FALSE}
@@ -11,9 +11,7 @@ library(plotly)
 library(p8105.datasets)
 library(dplyr)
 
-
 data("instacart") 
-
 ```
 
 ```{r}
