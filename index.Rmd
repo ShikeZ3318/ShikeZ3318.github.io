@@ -1,0 +1,6 @@
+# Hello!
+
+Welcome to my personal website. Here you’ll find information about my projects, background, and more.
+
+[About Me](about.html)
+
