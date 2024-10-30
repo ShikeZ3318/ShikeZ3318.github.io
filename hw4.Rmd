@@ -1,0 +1,81 @@
+---
+title: "hw4"
+author: "Shike Zhang"
+date: "2024-10-30"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(plotly)
+library(p8105.datasets)
+library(dplyr)
+
+
+data("instacart") 
+
+```
+
+```{r}
+# Sample 10,000 rows from the dataset for manageable plotting
+instacart_sample <- instacart %>% sample_n(10000)
+
+```
+
+```{r}
+# Scatter plot
+scatter_plot <- instacart_sample %>%
+  plot_ly(
+    x = ~order_number,
+    y = ~add_to_cart_order,
+    type = 'scatter',
+    mode = 'markers',
+    marker = list(opacity = 0.6)
+  ) %>%
+  layout(
+    title = "Scatter Plot: Order Number vs. Add to Cart Order",
+    xaxis = list(title = "Order Number"),
+    yaxis = list(title = "Add to Cart Order")
+  )
+scatter_plot
+
+
+```
+```{r}
+# Line plot
+line_plot <- instacart_sample %>%
+  count(order_dow) %>%
+  plot_ly(
+    x = ~order_dow,
+    y = ~n,
+    type = 'scatter',
+    mode = 'lines+markers'
+  ) %>%
+  layout(
+    title = "Line Plot: Order Count by Day of the Week",
+    xaxis = list(title = "Day of the Week (0 = Sunday, 6 = Saturday)"),
+    yaxis = list(title = "Order Count")
+  )
+line_plot
+
+```
+```{r}
+# Bar plot
+bar_plot <- instacart_sample %>%
+  count(product_name, sort = TRUE) %>%
+  top_n(10, n) %>%
+  plot_ly(
+    x = ~reorder(product_name, n),
+    y = ~n,
+    type = 'bar'
+  ) %>%
+  layout(
+    title = "Bar Plot: Top 10 Most Frequently Ordered Products",
+    xaxis = list(title = "Product Name"),
+    yaxis = list(title = "Frequency"),
+    xaxis = list(tickangle = -45)
+  )
+bar_plot
+
+```
+
